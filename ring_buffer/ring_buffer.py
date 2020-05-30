@@ -1,9 +1,21 @@
+from doubly_linked_list import DoublyLinkedList
+
 class RingBuffer:
     def __init__(self, capacity):
-        pass
+        self.capacity = capacity
+        self.current = None
+        self.storage = DoublyLinkedList()
 
     def append(self, item):
-        pass
+        if self.capacity > self.storage.length: # check to make sure that the list is within capacity
+            self.storage.add_to_tail(item) # go ahead and add the item to the end
+        else:
+            self.storage.remove_from_head()
+            self.storage.add_to_tail(item)
 
     def get(self):
-        pass
+        theList = []
+        for i in range(len(self.storage)):
+            theList.append(self.current.value)
+            self.current = self.current.next
+        return theList
